@@ -3,6 +3,9 @@
 #include "gameobjects/World.h"
 
 // Reference https://github.com/boardtobits/flocking-algorithm
+struct Vec2 {float x, y;};
+//struct Boid {Vec2 v, p;};
+
 
 // Main code
 int main(int, char**) {
