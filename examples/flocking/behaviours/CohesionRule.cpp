@@ -10,19 +10,39 @@ Vector2f CohesionRule::computeForce(const std::vector<Boid*>& neighborhood, Boid
   // find center of mass
 
   Vector2f centerPosition = Vector2f::zero();
+  Vector2f direction = Vector2f::zero();
   int numneighbors = neighborhood.size();
 
-  for (Boid* neighbor : neighborhood)
-  {
-    if (neighbor->getPosition().x == boid->getPosition().x && neighbor->getPosition().y == boid->getPosition().y)
+
+  if (numneighbors > 0)
     {
-      continue;
+
+    for (Boid* neighbor : neighborhood)
+    {
+      if (neighbor->getPosition().x == boid->getPosition().x && neighbor->getPosition().y == boid->getPosition().y)
+      {
+        continue;
+      }
+
+      centerPosition += neighbor->getPosition();
+    }
+
+    centerPosition /= numneighbors;
+    direction = centerPosition - boid->getPosition();
+    float distance;
+    if (direction == Vector2f::zero())
+    {
+      distance = .000000000000000000001f;
     }
     else
     {
-
+      float distance = sqrt( direction.x * direction.x + direction.y * direction.y );
     }
-  }
 
-  return cohesionForce;
+    Vector2f hat = {direction.x / distance, direction.y / distance};
+    float strength = distance/boid->getDetectionRadius();
+    cohesionForce = (hat * distance);
+    }
+
+  return Vector2f::normalized(cohesionForce);
 }

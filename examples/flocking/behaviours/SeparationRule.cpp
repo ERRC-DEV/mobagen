@@ -27,7 +27,7 @@ Vector2f SeparationRule::computeForce(const std::vector<Boid*>& neighborhood, Bo
       float strength = 1/distance;
       separatingForce -= (hat * strength);
     }
-    Vector2f distance = neighbor->getPosition() - boid->getPosition();
+    //Vector2f distance = neighbor->getPosition() - boid->getPosition();
   }
   //
   //    // todo: implement a force that if neighbor(s) enter the radius, moves the boid away from it/them
