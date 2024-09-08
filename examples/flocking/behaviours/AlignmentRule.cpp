@@ -18,13 +18,13 @@ Vector2f AlignmentRule::computeForce(const std::vector<Boid*>& neighborhood, Boi
     {
       if (neighbor->getPosition().x == boid->getPosition().x && neighbor->getPosition().y == boid->getPosition().y)
       {
+        numneighbors--;
         continue;
       }
 
       averageVelocity += neighbor->getVelocity();
     }
     averageVelocity /= numneighbors;
-    //computeWeightedForce()
 
   }
 
