@@ -184,3 +184,14 @@ void World::SetNodeColor(const Point2D& node, const Color32& color) { colors[(no
 Color32 World::GetNodeColor(const Point2D& node) { return colors[(node.y + sideSize / 2) * sideSize + node.x + sideSize / 2]; }
 
 int World::GetSize() const { return sideSize; }
+
+int World::GetRand()
+{
+  int number = randomNumbers[randomIndex];
+  randomIndex ++;
+  if (randomIndex >= 100)
+  {
+    randomIndex = 0;
+  }
+  return number;
+}

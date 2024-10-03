@@ -5,14 +5,19 @@
 bool RecursiveBacktrackerExample::Step(World* w) {
   // todo: implement this
   Point2D startPoint;
-  if (stack.empty())
+  while (visited[startPoint.x][startPoint.y])
   {
-    startPoint = randomStartPoint(w);
+    if (stack.empty())
+    {
+      startPoint = randomStartPoint(w);
+    }
+    else
+    {
+      startPoint = stack.back();
+      stack.pop_back();
+    }
   }
-  else
-  {
-    startPoint = stack.back();
-  }
+
 
   std::vector<Point2D> visitables = getVisitables(w, startPoint);
   if (visitables.empty())
@@ -21,9 +26,27 @@ bool RecursiveBacktrackerExample::Step(World* w) {
   }
   else
   {
-    //int randomNumber = Random(0, visitables.size())
-  }
+    int randomNumber = w->GetRand();
+    randomNumber = randomNumber % visitables.size();
+    stack.push_back(visitables[randomNumber]);
+    if (startPoint.Up() == visitables[randomNumber])
+    {
+      //visitables[randomNumber]
+    }
+    if (startPoint.Down() == visitables[randomNumber])
+    {
 
+    }
+    if (startPoint.Left() == visitables[randomNumber])
+    {
+
+    }
+    if (startPoint.Right() == visitables[randomNumber])
+    {
+
+    }
+  }
+  visited[startPoint.x][startPoint.y] = true;
   return false;
 }
 
