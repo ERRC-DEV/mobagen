@@ -4,7 +4,21 @@
 #include <climits>
 bool RecursiveBacktrackerExample::Step(World* w) {
   // todo: implement this
-  Point2D startPoint = randomStartPoint(w);
+  Point2D startPoint;
+  if (stack.empty())
+  {
+    startPoint = randomStartPoint(w);
+  }
+  else
+  {
+    startPoint = stack.back();
+  }
+
+  std::vector<Point2D> visitables = getVisitables(w, startPoint);
+  if (visitables.empty())
+  {
+    stack.pop_back();
+  }
 
   return false;
 }
