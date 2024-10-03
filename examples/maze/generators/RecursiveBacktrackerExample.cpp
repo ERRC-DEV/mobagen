@@ -19,6 +19,10 @@ bool RecursiveBacktrackerExample::Step(World* w) {
   {
     stack.pop_back();
   }
+  else
+  {
+    //int randomNumber = Random(0, visitables.size())
+  }
 
   return false;
 }
