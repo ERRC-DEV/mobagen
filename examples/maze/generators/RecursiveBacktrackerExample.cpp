@@ -4,6 +4,8 @@
 #include <climits>
 bool RecursiveBacktrackerExample::Step(World* w) {
   // todo: implement this
+  Point2D startPoint = randomStartPoint(w);
+
   return false;
 }
 
