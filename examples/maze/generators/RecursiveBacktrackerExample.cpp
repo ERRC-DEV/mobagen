@@ -9,11 +9,10 @@ bool RecursiveBacktrackerExample::Step(World* w) {
   if (stack.empty() && visited[-sideSideOver2][-sideSideOver2] == false)
   {
     stack.push_back({-sideSideOver2, -sideSideOver2});
-    w->SetNodeColor({-sideSideOver2,sideSideOver2}, Color::Red);
+    w->SetNodeColor({-sideSideOver2,-sideSideOver2}, Color::Red);
+    visited[-sideSideOver2][-sideSideOver2] = true;
     return true;
   }
-
-
 
   if (stack.empty())
   {
@@ -35,22 +34,22 @@ bool RecursiveBacktrackerExample::Step(World* w) {
   if (currentPoint.Up() == visitable)
   {
     //visitables[randomNumber]
-    w->SetNodeColor(visitable, Color::Red);
+    //w->SetNodeColor(visitable, Color::Red);
     w->SetNorth(currentPoint, false);
   }
   if (currentPoint.Down() == visitable)
   {
-    w->SetNodeColor(visitable, Color::Red);
+    //w->SetNodeColor(visitable, Color::Red);
     w->SetSouth(currentPoint, false);
   }
   if (currentPoint.Left() == visitable)
   {
-    w->SetNodeColor(visitable, Color::Red);
+    //w->SetNodeColor(visitable, Color::Red);
     w->SetWest(currentPoint, false);
   }
   if (currentPoint.Right() == visitable)
   {
-    w->SetNodeColor(visitable, Color::Red);
+    //w->SetNodeColor(visitable, Color::Red);
     w->SetEast(currentPoint, false);
   }
 
