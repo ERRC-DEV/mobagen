@@ -4,50 +4,58 @@
 #include <climits>
 bool RecursiveBacktrackerExample::Step(World* w) {
   // todo: implement this
-  Point2D startPoint;
-  while (visited[startPoint.x][startPoint.y])
+  auto sideSideOver2 = w->GetSize()/2;
+
+  if (stack.empty() && visited[-sideSideOver2][-sideSideOver2] == false)
   {
-    if (stack.empty())
-    {
-      startPoint = randomStartPoint(w);
-    }
-    else
-    {
-      startPoint = stack.back();
-      stack.pop_back();
-    }
+    stack.push_back({-sideSideOver2, -sideSideOver2});
+    w->SetNodeColor({-sideSideOver2,sideSideOver2}, Color::Red);
+    return true;
   }
 
 
-  std::vector<Point2D> visitables = getVisitables(w, startPoint);
-  if (visitables.empty())
+
+  if (stack.empty())
   {
+    return false;
+  }
+
+  auto currentPoint = stack.back();
+  std::vector<Point2D> visitables = getVisitables(w, currentPoint);
+  if (visitables.empty()) {
+    w->SetNodeColor(stack.back(), Color::Black);
     stack.pop_back();
+    return true;
   }
-  else
+  int randomNumber = w->GetRand();
+  randomNumber = randomNumber % visitables.size();
+  Point2D visitable = visitables[randomNumber];
+  stack.push_back(visitable);
+  w->SetNodeColor(visitable, Color::Red);
+  if (currentPoint.Up() == visitable)
   {
-    int randomNumber = w->GetRand();
-    randomNumber = randomNumber % visitables.size();
-    stack.push_back(visitables[randomNumber]);
-    if (startPoint.Up() == visitables[randomNumber])
-    {
-      //visitables[randomNumber]
-    }
-    if (startPoint.Down() == visitables[randomNumber])
-    {
-
-    }
-    if (startPoint.Left() == visitables[randomNumber])
-    {
-
-    }
-    if (startPoint.Right() == visitables[randomNumber])
-    {
-
-    }
+    //visitables[randomNumber]
+    w->SetNodeColor(visitable, Color::Red);
+    w->SetNorth(currentPoint, false);
   }
-  visited[startPoint.x][startPoint.y] = true;
-  return false;
+  if (currentPoint.Down() == visitable)
+  {
+    w->SetNodeColor(visitable, Color::Red);
+    w->SetSouth(currentPoint, false);
+  }
+  if (currentPoint.Left() == visitable)
+  {
+    w->SetNodeColor(visitable, Color::Red);
+    w->SetWest(currentPoint, false);
+  }
+  if (currentPoint.Right() == visitable)
+  {
+    w->SetNodeColor(visitable, Color::Red);
+    w->SetEast(currentPoint, false);
+  }
+
+  visited[visitable.x][visitable.y] = true;
+  return true;
 }
 
 void RecursiveBacktrackerExample::Clear(World* world) {
