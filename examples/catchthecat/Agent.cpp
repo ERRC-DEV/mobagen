@@ -59,7 +59,7 @@ std::vector<Point2D> Agent::generatePath(World* w) {
       if (!visited[neighbor]) {
         // Push to the queue
         cameFrom.emplace(neighbor, current.point);
-
+        // just push them all, it is automatically sorted
       }
     }
     // for every neighbor set the cameFrom
