@@ -6,6 +6,7 @@
 
 #include "../FastNoiseLite.h"
 #include "../PerlinNoise.hpp"
+#include "glm/gtx/compatibility.hpp"
 
 std::vector<Color32> Generate(int sideSize, float displacement) {
 /*
@@ -19,7 +20,7 @@ std::vector<Color32> Generate(int sideSize, float displacement) {
   base.SetFractalOctaves(2);
   base.SetSeed(28); //This number has no meaning except that it is my boyfriend's favorite number
   base.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
-  const float FREQUENCY_HIGH = 4.0f, FREQUENCY_LOW = 1.0f, TOTAL_AMPLITUDE = 1.25f, X_OFFSET = 50.0f, Y_OFFSET = 50.0f, REDISTRIBUTION_EXPONENT = 1.5f;
+  const float FREQUENCY_HIGH = 4.0f, FREQUENCY_LOW = 1.0f, TOTAL_AMPLITUDE = 1.25f, X_OFFSET = 50.0f, Y_OFFSET = 50.0f, REDISTRIBUTION_EXPONENT = 1.5f, LERP_MIX = 0.4f;
 
 
   for (int y = 0; y < sideSize; y++) {
@@ -31,6 +32,10 @@ std::vector<Color32> Generate(int sideSize, float displacement) {
       elevation /= TOTAL_AMPLITUDE;
       elevation = pow(elevation, REDISTRIBUTION_EXPONENT);
 
+      // Force islands
+      float distance = 1 - (1-(nx*nx)) * (1-(ny*ny));
+
+      elevation = std::lerp(elevation, 1-distance, LERP_MIX);
     }
   }
 }
