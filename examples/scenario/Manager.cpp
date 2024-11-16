@@ -11,7 +11,7 @@ Manager::Manager(Engine* engine, int size) : GameObject(engine) {
   // todo: add your generator
   generators.push_back(new ParticleGenerator());
   generators.push_back(new RandomScenarioGenerator());
-  //generators.push_back(new EthansGenerator());
+  generators.push_back(new EthansGenerator());
 }
 
 void Manager::SetPixels(std::vector<Color32>& input) {
