@@ -6,6 +6,7 @@
 #include "../GeneratorBase.h"
 #include <glm/vec3.hpp>
 #include <glm/gtx/normal.hpp>
+
 class ParticleGenerator : public ScenarioGeneratorBase {
 private:
   // todo: improve this data structure to be more cache friendly
