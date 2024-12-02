@@ -16,9 +16,9 @@ class EthansGenerator : public ScenarioGeneratorBase {
 private:
   float elevationMap[2048][2048];
   int sideSizeCached = 0;
-  time_t timeOfLastUpdate = 0;
+  float timeOfLastUpdate = 0;
   std::vector<Color32> heightsToColor();
-  void generateElevationMap();
+  void generateElevationMap(float displacement);
   void doErosion(float dt);
 
   // Erosion constants
